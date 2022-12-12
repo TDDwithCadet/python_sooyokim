@@ -1,15 +1,35 @@
-# This is a sample Python script.
-
-# Press ⌃R to execute it or replace it with your code.
-# Press Double ⇧ to search everywhere for classes, files, tool windows, actions, and settings.
 
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press ⌘F8 to toggle the breakpoint.
-    test
-# Press the green button in the gutter to run the script.
+
+class TestCase:
+    def __init__(self, name):
+        self.name = name
+    def run(self):
+        method = getattr(self, self.name)
+        method()
+
+class WasRun(TestCase):
+    def __init__(self, name):
+        self.wasRun = None
+        TestCase.__init__(self, name)
+
+
+class TestCaseTest(TestCase):
+   def testRunning(self):
+       test = WasRun("testMethod")
+       assert(not test.wasRun)
+       # test.run()
+       # assert(test.wasRun)
+
+
+
+
 if __name__ == '__main__':
-    print_hi('PyCharm')
+    # test = WasRun("testMethod")
+    # print(test.)
+    # print(test.wasRun)
+    # test.run()
+    # print(test.wasRun)
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+    TestCaseTest("testRunning").run()
+
