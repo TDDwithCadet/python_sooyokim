@@ -126,5 +126,5 @@ if __name__ == '__main__':
     # TestCaseTest("testSetUp").run()
     # TestCaseTest("testTemplateMethod").run()
     # TestCaseTest("TestResult").run()
-
+    # 24장 마무리
 
