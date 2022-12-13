@@ -10,6 +10,10 @@ class TestCase:
         self.setUp()
         method = getattr(self, self.name)
         method()
+        self.tearDown()
+
+    def tearDown(self):
+        pass
 
 
 class WasRun(TestCase):
@@ -18,32 +22,32 @@ class WasRun(TestCase):
         TestCase.__init__(self, name)
     def testMethod(self):
         self.wasRun = 1
+        self.log = self.log + "testMethod "
     def setUp(self):
         self.wasRun = None
         self.wasSetUp = 1
+        self.log = "setUp "
+    def tearDown(self):
+        self.log = self.log + "tearDown "
+
 
 
 class TestCaseTest(TestCase):
     def setUp(self):
         self.test = WasRun("testMethod")
-    def testRunning(self):
-        self.test.run()
-        assert(self.test.wasRun)
-       # test = WasRun("testMethod")
-       # print(test.wasRun)
-       # assert(not test.wasRun)
-       # test.run()
-       # print(test.wasRun)
-       # assert(self.test.wasRun)
-       # print("complete")
+
+    # def testRunning(self):
+    #     self.test.run()
+    #     assert(self.test.wasRun)
 
     def testSetUp(self):
-        # test = WasRun("testMethod")
         self.test.run()
-        assert(self.test.wasSetUp)
+        assert("setUp testMethod " == self.test.log)
 
-
-
+    def testTemplateMethod(self):
+        test = WasRun("testMethod")
+        test.run()
+        assert("setUp testMethod tearDown " == test.log)
 
 
 if __name__ == '__main__':
@@ -51,7 +55,7 @@ if __name__ == '__main__':
     # print(test.wasRun)
     # test.run()
     # print(test.wasRun)
-
-    TestCaseTest("testRunning").run()
-    TestCaseTest("testSetUp").run()
+    # TestCaseTest("testRunning").run()
+    # TestCaseTest("testSetUp").run()
+    TestCaseTest("testTemplateMethod").run()
 
